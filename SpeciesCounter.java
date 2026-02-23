@@ -1,53 +1,59 @@
 // SpeciesCounter.java
-//
-// 
+// Yonis yassin
+// 2-23-26
 // Encapsulates species data and related operations
 
 public class SpeciesCounter {
-    private static final String FILE_NAME = "PalmerPenguins.csv";
 
-    // Constants to represent species names
-    private static final String SP_CHINSTRAP = "Chinstrap";
-    private static final String SP_GENTOO = "Gentoo";
-    private static final String SP_ADELIE = "Adelie";
+    // Constants
+    static final String FILE_NAME = "PalmerPenguins.csv";
 
-    // Indexes for species count
-    private static final int NUM_SPECIES = 3;
-    private static final int SP_CHINSTRAP_INDEX = 0;
-    private static final int SP_GENTOO_INDEX = 1;
-    private static final int SP_ADELIE_INDEX = 2;
+    public static final int NUM_SPECIES = 3;
+    public static final String SP_CHINSTRAP = "Chinstrap";
+    public static final String SP_GENTOO = "Gentoo";
+    public static final String SP_ADELIE = "Adelie";
 
     // Private fields for encapsulation
-
-
-    // Default constructor
-    public SpeciesCounter() {
-        this.speciesData = new String[0]; // Empty array initially
-        this.speciesCount = null;         // Null until initialized
-    }
+    private String[] speciesData;
+    private int[] speciesCount;
 
     // Reads species data from CSV file
     public void readSpeciesData() {
-
+        speciesData = CSVReader.readFile(FILE_NAME, 1);
     }
 
-    // Initializes the species count array
+    // Initializes species count array
     public void initializeSpeciesCount() {
-
+        speciesCount = new int[NUM_SPECIES];
     }
 
-    // Checks if the species data is empty
+    // Checks if species data is empty
     public boolean isDataEmpty() {
-        return false;
+        return speciesData == null || speciesData.length == 0;
     }
 
     // Counts occurrences of each species
     public void countSpecies() {
 
+        for (int i = 0; i < speciesData.length; i++) {
+
+            if (speciesData[i].equals(SP_CHINSTRAP)) {
+                speciesCount[0]++;
+
+            } else if (speciesData[i].equals(SP_GENTOO)) {
+                speciesCount[1]++;
+
+            } else if (speciesData[i].equals(SP_ADELIE)) {
+                speciesCount[2]++;
+            }
+        }
     }
 
-    // Prints the species count
+    // Prints the species counts
     public void printSpeciesCount() {
 
+        System.out.println(SP_CHINSTRAP + " count = " + speciesCount[0]);
+        System.out.println(SP_GENTOO + " count = " + speciesCount[1]);
+        System.out.println(SP_ADELIE + " count = " + speciesCount[2]);
     }
 }
